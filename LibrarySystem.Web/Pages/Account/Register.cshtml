@@ -12,6 +12,7 @@
                 <h5 class="text-center text-muted mb-4">Create a new account.</h5>
 
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    @Html.AntiForgeryToken()
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
                     <div class="form-floating mb-3">

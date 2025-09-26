@@ -13,6 +13,7 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <form method="post">
+                    @Html.AntiForgeryToken()
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                     <div class="mb-3">

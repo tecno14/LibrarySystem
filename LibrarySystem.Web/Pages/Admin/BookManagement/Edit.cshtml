@@ -17,6 +17,7 @@
             </div>
             <div class="card-body">
                 <form method="post">
+                    @Html.AntiForgeryToken()
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                     <!-- Hidden input for the Book ID is crucial for the update -->
@@ -84,6 +85,7 @@
                     This action cannot be undone through the UI.
                 </p>
                 <form method="post" asp-page-handler="Archive">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" asp-for="Book.Id" />
                     <button type="submit" class="btn btn-danger w-100">Archive This Book Title</button>
                 </form>

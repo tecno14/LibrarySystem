@@ -17,6 +17,7 @@
 <div class="card shadow-sm mb-4">
     <div class="card-body">
         <form method="get" class="row g-3 align-items-center">
+            @Html.AntiForgeryToken()
             <div class="col-md-6">
                 <label for="query" class="visually-hidden">Search</label>
                 <input asp-for="Query" class="form-control" placeholder="Search by title, author, or ISBN..." />

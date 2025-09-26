@@ -24,6 +24,7 @@
         <div class="card-header">Add a New Copy</div>
         <div class="card-body">
             <form method="post" asp-page-handler="AddCopy" class="row g-3 align-items-end">
+                @Html.AntiForgeryToken()
                 <input type="hidden" name="bookId" value="@Model.Book.Id" />
                 <input type="hidden" name="isbn" value="@Model.Book.ISBN" />
                 <div class="col-md-4">
@@ -59,6 +60,7 @@
                             <td>@copy.Location</td>
                             <td>
                                 <form method="post" asp-page-handler="UpdateStatus">
+                                    @Html.AntiForgeryToken()
                                     <input type="hidden" name="bookId" value="@Model.Book.Id" />
                                     <input type="hidden" name="copyId" value="@copy.Id" />
                                     <div class="input-group">

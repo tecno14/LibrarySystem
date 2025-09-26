@@ -41,6 +41,7 @@
             @if (User.Identity?.IsAuthenticated == true && Model.Book.AvailableCopies > 0)
                 {
                     <form method="post">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="isbn" value="@Model.Book.ISBN" />
                         <button type="submit" class="btn btn-success btn-lg" asp-page-handler="Borrow">
                             Borrow a Copy

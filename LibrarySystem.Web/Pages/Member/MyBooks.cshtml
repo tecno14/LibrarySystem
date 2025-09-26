@@ -51,6 +51,7 @@
                             </td>
                             <td>
                                 <form method="post" asp-page-handler="Return">
+                                    @Html.AntiForgeryToken()
                                     <input type="hidden" name="borrowingId" value="@borrowing.Id" />
                                     <button type="submit" class="btn btn-sm btn-outline-primary">Return Book</button>
                                 </form>

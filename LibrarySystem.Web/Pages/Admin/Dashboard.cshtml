@@ -119,6 +119,7 @@
             <p>Use these tools to populate the database with sample data for testing.</p>
             <div class="d-flex gap-2">
                 <form method="post" asp-page-handler="SeedBooks">
+                    @Html.AntiForgeryToken()
                     <button type="submit" class="btn btn-secondary">Seed 50 Book Titles</button>
                 </form>
             </div>
