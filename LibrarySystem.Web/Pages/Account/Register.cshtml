@@ -1,0 +1,46 @@
+﻿@page
+@model LibrarySystem.Web.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">@ViewData["Title"]</h1>
+                <h5 class="text-center text-muted mb-4">Create a new account.</h5>
+
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="RegisterInput.FullName" class="form-control" aria-required="true" />
+                        <label asp-for="RegisterInput.FullName"></label>
+                        <span asp-validation-for="RegisterInput.FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="RegisterInput.Username" class="form-control" autocomplete="username" aria-required="true" />
+                        <label asp-for="RegisterInput.Username"></label>
+                        <span asp-validation-for="RegisterInput.Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="RegisterInput.Password" class="form-control" type="password" autocomplete="new-password" aria-required="true" />
+                        <label asp-for="RegisterInput.Password"></label>
+                        <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="RegisterInput.ConfirmPassword" class="form-control" type="password" autocomplete="new-password" aria-required="true" />
+                        <label asp-for="RegisterInput.ConfirmPassword"></label>
+                        <span asp-validation-for="RegisterInput.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@page
+@model LibrarySystem.Web.Pages.Account.AccessDeniedModel
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<header class="text-center">
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="lead">You do not have permission to view this resource.</p>
+    <p>Please contact a system administrator if you believe this is an error.</p>
+    <a asp-page="/Index" class="btn btn-primary mt-3">Return to Home</a>
+</header>

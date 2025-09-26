@@ -1,0 +1,19 @@
+﻿using Microsoft.Data.SqlClient;
+
+namespace LibrarySystem.DAL.Extensions;
+
+/// <summary>
+/// Extension method to safely check if a column exists in the data reader.
+/// </summary>
+public static class SqlDataReaderExtensions
+{
+    public static bool HasColumn(this SqlDataReader dr, string columnName)
+    {
+        for (int i = 0; i < dr.FieldCount; i++)
+        {
+            if (dr.GetName(i).Equals(columnName, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+        return false;
+    }
+}

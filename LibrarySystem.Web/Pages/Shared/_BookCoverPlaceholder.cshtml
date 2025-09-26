@@ -1,0 +1,33 @@
+﻿@using LibrarySystem.Web.ViewModels
+@model BookCoverViewModel
+
+@{
+    var imageUrl = Model.CoverImageUrl;
+    var isList = Model.IsListView;
+
+    var imageClass = isList ? "card-img-top" : "img-fluid rounded shadow";
+    var imageStyle = isList ? "height: 300px; object-fit: cover;" : null;
+
+    var fallbackClass = isList
+        ? "card-img-top bg-secondary text-white"
+        : "img-fluid rounded shadow bg-secondary text-white";
+
+    var fallbackStyle = isList
+        ? "height: 300px;"
+        : "width: 100%; aspect-ratio: 2 / 3;"; // Matches 400x600 ratio
+}
+
+@if (!string.IsNullOrEmpty(imageUrl))
+{
+    <img src="@imageUrl"
+         alt="Cover for @Model.Title"
+         class="@imageClass"
+         style="@imageStyle" />
+}
+else
+{
+    <div class="@fallbackClass d-flex align-items-center justify-content-center text-center p-3"
+         style="@fallbackStyle">
+        <h5 class="book-title-placeholder m-0">@Model.Title</h5>
+    </div>
+}

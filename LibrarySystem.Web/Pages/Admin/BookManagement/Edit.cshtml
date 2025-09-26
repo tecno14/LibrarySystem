@@ -1,0 +1,93 @@
+﻿@page "{id:int}"
+@model LibrarySystem.Web.Pages.Admin.BookManagement.EditModel
+@{
+    ViewData["Title"] = "Edit Book Title";
+}
+
+<h1 class="display-6">@ViewData["Title"]</h1>
+<p class="text-muted">Update the metadata for "@Model.Book.Title".</p>
+<hr />
+
+<div class="row">
+    <!-- EDIT FORM COLUMN -->
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                Book Details
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <!-- Hidden input for the Book ID is crucial for the update -->
+                    <input type="hidden" asp-for="Book.Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Title" class="form-label"></label>
+                        <input asp-for="Book.Title" class="form-control" />
+                        <span asp-validation-for="Book.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Author" class="form-label"></label>
+                        <input asp-for="Book.Author" class="form-control" />
+                        <span asp-validation-for="Book.Author" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.ISBN" class="form-label"></label>
+                        <input asp-for="Book.ISBN" class="form-control" />
+                        <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Book.Genre" class="form-label"></label>
+                            <input asp-for="Book.Genre" class="form-control" />
+                            <span asp-validation-for="Book.Genre" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Book.PublicationYear" class="form-label"></label>
+                            <input asp-for="Book.PublicationYear" class="form-control" />
+                            <span asp-validation-for="Book.PublicationYear" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Publisher" class="form-label"></label>
+                        <input asp-for="Book.Publisher" class="form-control" />
+                        <span asp-validation-for="Book.Publisher" class="text-danger"></span>
+                    </div>
+
+@*                     <div class="mb-3">
+                        <label asp-for="Book.CoverImageUrl" class="form-label"></label>
+                        <input asp-for="Book.CoverImageUrl" class="form-control" />
+                        <span asp-validation-for="Book.CoverImageUrl" class="text-danger"></span>
+                    </div> *@
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DANGER ZONE COLUMN -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-danger">
+            <div class="card-header bg-danger text-white">
+                Danger Zone
+            </div>
+            <div class="card-body">
+                <p>
+                    Archiving this title will hide it from the public catalog.
+                    This action cannot be undone through the UI.
+                </p>
+                <form method="post" asp-page-handler="Archive">
+                    <input type="hidden" asp-for="Book.Id" />
+                    <button type="submit" class="btn btn-danger w-100">Archive This Book Title</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

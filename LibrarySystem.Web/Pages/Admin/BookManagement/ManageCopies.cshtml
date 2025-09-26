@@ -1,0 +1,83 @@
+﻿@page
+@model LibrarySystem.Web.Pages.Admin.BookManagement.ManageCopiesModel
+@{
+    ViewData["Title"] = "Manage Copies";
+}
+
+@if (Model.Book != null)
+{
+    <h1 class="display-6">Manage Inventory</h1>
+    <h4 class="text-muted">@Model.Book.Title</h4>
+    <hr />
+
+    <!-- Display Status Messages -->
+    @if (TempData["StatusMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            @TempData["StatusMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Add New Copy Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">Add a New Copy</div>
+        <div class="card-body">
+            <form method="post" asp-page-handler="AddCopy" class="row g-3 align-items-end">
+                <input type="hidden" name="bookId" value="@Model.Book.Id" />
+                <input type="hidden" name="isbn" value="@Model.Book.ISBN" />
+                <div class="col-md-4">
+                    <label asp-for="NewCopyLocation" class="form-label"></label>
+                    <input asp-for="NewCopyLocation" class="form-control" placeholder="e.g., Shelf 4B" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Add Copy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- List of Existing Copies -->
+    <div class="card shadow-sm">
+        <div class="card-header">Existing Copies (@Model.Copies.Count)</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Copy ID</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var copy in Model.Copies)
+                    {
+                        <tr>
+                            <td>@copy.Id</td>
+                            <td>@copy.Status</td>
+                            <td>@copy.Location</td>
+                            <td>
+                                <form method="post" asp-page-handler="UpdateStatus">
+                                    <input type="hidden" name="bookId" value="@Model.Book.Id" />
+                                    <input type="hidden" name="copyId" value="@copy.Id" />
+                                    <div class="input-group">
+                                        <select name="newStatus" class="form-select form-select-sm" asp-items="Html.GetEnumSelectList<LibrarySystem.Common.Enums.BookCopyStatus>()"></select>
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a asp-page="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">Book not found.</div>
+}

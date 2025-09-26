@@ -1,0 +1,14 @@
+﻿@page
+@model LibrarySystem.Web.Pages.DatabaseErrorModel
+@{
+    ViewData["Title"] = "Database Connection Error";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-1 text-warning">Service Unavailable</h1>
+    <h2 class="display-6">We're having trouble connecting to our services.</h2>
+    <p class="lead text-muted mt-4">
+        Our team has been notified of the issue. Please try again in a few moments.
+    </p>
+    <a asp-page="/Index" class="btn btn-primary mt-3">Return to Home</a>
+</div>

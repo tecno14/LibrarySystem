@@ -1,0 +1,67 @@
+﻿@page
+@model LibrarySystem.Web.Pages.Admin.BookManagement.CreateModel
+@{
+    ViewData["Title"] = "Add New Book Title";
+}
+
+<h1 class="display-6">@ViewData["Title"]</h1>
+<p class="text-muted">Enter the metadata for a new book in the catalog.</p>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Title" class="form-label"></label>
+                        <input asp-for="Book.Title" class="form-control" />
+                        <span asp-validation-for="Book.Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Author" class="form-label"></label>
+                        <input asp-for="Book.Author" class="form-control" />
+                        <span asp-validation-for="Book.Author" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.ISBN" class="form-label"></label>
+                        <input asp-for="Book.ISBN" class="form-control" />
+                        <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Book.Genre" class="form-label"></label>
+                            <input asp-for="Book.Genre" class="form-control" />
+                            <span asp-validation-for="Book.Genre" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Book.PublicationYear" class="form-label"></label>
+                            <input asp-for="Book.PublicationYear" class="form-control" />
+                            <span asp-validation-for="Book.PublicationYear" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Book.Publisher" class="form-label"></label>
+                        <input asp-for="Book.Publisher" class="form-control" />
+                        <span asp-validation-for="Book.Publisher" class="text-danger"></span>
+                    </div>
+
+@*                     <div class="mb-3">
+                        <label asp-for="Book.CoverImageUrl" class="form-label"></label>
+                        <input asp-for="Book.CoverImageUrl" class="form-control" />
+                        <span asp-validation-for="Book.CoverImageUrl" class="text-danger"></span>
+                    </div> *@
+
+                    <button type="submit" class="btn btn-primary">Create Title</button>
+                    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

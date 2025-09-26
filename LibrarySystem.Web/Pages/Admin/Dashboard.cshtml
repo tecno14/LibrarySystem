@@ -1,0 +1,127 @@
+﻿@page
+@model LibrarySystem.Web.Pages.Admin.DashboardModel
+@inject IWebHostEnvironment Env
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1 class="display-5">@ViewData["Title"]</h1>
+<p class="text-muted">A high-level overview of the library's activity.</p>
+<hr />
+
+@if (TempData["StatusMessage"] != null)
+{
+    var isSuccess = TempData["Success"] as bool? ?? false;
+    var alertClass = isSuccess ? "alert-success" : "alert-warning";
+
+    <div class="alert @alertClass alert-dismissible" role="alert">
+        @TempData["StatusMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Book Titles</h5>
+                <p class="card-text display-4">@Model.DashboardStats.TotalBookTitles</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Total Copies</h5>
+                <p class="card-text display-4">@Model.DashboardStats.TotalBookCopies</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Registered Users</h5>
+                <p class="card-text display-4">@Model.DashboardStats.TotalUsers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Books Checked Out</h5>
+                <p class="card-text display-4">@Model.DashboardStats.BooksCheckedOut</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4><i class="bi bi-exclamation-triangle-fill text-danger"></i> Overdue Books</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.DashboardStats.OverdueBooks.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var borrowing in Model.DashboardStats.OverdueBooks)
+                        {
+                            <li class="list-group-item">
+                                <strong>@borrowing.BookTitle</strong><br />
+                                <small>Borrowed by: @borrowing.UserFullName | Due: @borrowing.DueDate.ToString("yyyy-MM-dd")</small>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No overdue books. Great job!</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4><i class="bi bi-book"></i> Recently Added Titles</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.DashboardStats.RecentlyAddedBooks.Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var book in Model.DashboardStats.RecentlyAddedBooks)
+                        {
+                            <li class="list-group-item">
+                                <strong>@book.Title</strong><br />
+                                <small>by @book.Author</small>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">No books have been added recently.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Env.IsDevelopment())
+{
+    <div class="card shadow-sm mt-5">
+        <div class="card-header">
+            <h4><i class="bi bi-tools"></i> Admin Tools (Development Only)</h4>
+        </div>
+        <div class="card-body">
+            <p>Use these tools to populate the database with sample data for testing.</p>
+            <div class="d-flex gap-2">
+                <form method="post" asp-page-handler="SeedBooks">
+                    <button type="submit" class="btn btn-secondary">Seed 50 Book Titles</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}
