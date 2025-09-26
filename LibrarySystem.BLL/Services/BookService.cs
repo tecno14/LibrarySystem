@@ -30,7 +30,7 @@ public class BookService(
     /// Gets a list of all non-hidden book titles.
     /// </summary>
     public Task<IEnumerable<Book>> GetPagedAsync(int page = 1, int pageSize = 20) =>
-        _bookRepository.GetPagedAsync(1, 1000, _currentUser.IsPowerUser);
+        _bookRepository.GetPagedAsync(page, pageSize, _currentUser.IsPowerUser);
 
     /// <summary>
     /// Gets a distinct list of all genres in the catalog.
